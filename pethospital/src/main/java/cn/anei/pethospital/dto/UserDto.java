@@ -25,14 +25,14 @@ public class UserDto {
     private Integer type;
 
     public UserDto(User user){
-        this.uid = user.getUid();
-        this.name = user.getName();
-        this.realName = user.getRealName();
-        this.email = user.getEmail();
-        this.cardNum = user.getCardNum();
-        this.cardPic = user.getCardPic();
-        this.birth = user.getBirth();
-        this.sex = user.getSex();
-        this.type = user.getType();
+//        this.uid = user.getUid();
+//        this.name = user.getName();
+//        this.realName = user.getRealName();
+//        this.email = user.getEmail();
+//        this.cardNum = user.getCardNum();
+//        this.cardPic = user.getCardPic();
+//        this.birth = user.getBirth();
+//        this.sex = user.getSex();
+//        this.type = user.getType();
     }
 }
