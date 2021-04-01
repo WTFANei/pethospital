@@ -1,0 +1,2 @@
+webpackJsonp([5],{"1ecH":function(e,t){},NjT6:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i={render:function(){this.$createElement;this._self._c;return this._m(0)},staticRenderFns:[function(){var e=this.$createElement,t=this._self._c||e;return t("div",{staticClass:"welcome"},[t("h1",[this._v("欢迎登陆漫画系统后台！")]),this._v(" "),t("h4",[this._v("—— XXX ")])])}]};var s=n("VU/8")({data:function(){return{loading:!1}}},i,!1,function(e){n("1ecH")},"data-v-52cd1e29",null);t.default=s.exports}});
+//# sourceMappingURL=5.244a59ed5fef3272ebfa.js.map
