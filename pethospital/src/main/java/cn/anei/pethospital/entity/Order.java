@@ -31,4 +31,6 @@ public class Order {
     private Date otime;
     @Column(name = "finish_time")
     private Date ftime;
+    @Column(name = "is_finish")
+    private Integer isfinish;
 }
