@@ -5,11 +5,6 @@ import lombok.Data;
 
 import java.util.Date;
 
-/**
- * @Author: ANei
- * @Date: 下午3:36 18/3/6
- * @Description:
- */
 
 @Data
 public class UserDto {
