@@ -41,12 +41,12 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Override
     public Boolean medicineModify(Medicine medicine) {
-        Medicine d = medicineRepository.findOne(medicine.getId());
-        if (d!=null){
-            d.setName(medicine.getName());
-            d.setText(medicine.getText());
+        Medicine m = medicineRepository.findOne(medicine.getId());
+        if (m!=null){
+            m.setName(medicine.getName());
+            m.setText(medicine.getText());
             try{
-                medicineRepository.save(d);
+                medicineRepository.save(m);
                 return true;
             }catch (Exception e){
                 return false;
@@ -60,7 +60,7 @@ public class MedicineServiceImpl implements MedicineService {
         PageRequest pageRequest = new PageRequest(searchParam.getPage(), searchParam.getSize());
         Page<Medicine> medicines;
         if (searchParam.getParam() != null) {
-            medicines = medicineRepository.findAllByNameLike("%" + searchParam.getParam() + "%", pageRequest);
+            medicines = medicineRepository.findAllByNameContaining(searchParam.getParam(), pageRequest);
         } else {
             medicines = medicineRepository.findAll(pageRequest);
         }
@@ -69,8 +69,8 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Override
     public Medicine getMedicine(Medicine medicine) {
-        Medicine d = medicineRepository.findById(medicine.getId());
-        return d;
+        Medicine m = medicineRepository.findById(medicine.getId());
+        return m;
     }
 
     public Map<String, Object> medicines(Page<Medicine> medicines){

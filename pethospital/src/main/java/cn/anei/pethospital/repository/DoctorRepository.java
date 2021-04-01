@@ -10,5 +10,5 @@ public interface DoctorRepository extends JpaRepository<Doctor, String> {
 
     Doctor findById(String id);
 
-    Page<Doctor> findAllByNameLike(String name, Pageable pageable);
+    Page<Doctor> findAllByNameContaining(String name, Pageable pageable);
 }

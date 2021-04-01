@@ -41,12 +41,12 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Boolean itemModify(Item item) {
-        Item d = itemRepository.findOne(item.getId());
-        if (d!=null){
-            d.setName(item.getName());
-            d.setText(item.getText());
+        Item i = itemRepository.findOne(item.getId());
+        if (i!=null){
+            i.setName(item.getName());
+            i.setText(item.getText());
             try{
-                itemRepository.save(d);
+                itemRepository.save(i);
                 return true;
             }catch (Exception e){
                 return false;
@@ -60,7 +60,7 @@ public class ItemServiceImpl implements ItemService {
         PageRequest pageRequest = new PageRequest(searchParam.getPage(), searchParam.getSize());
         Page<Item> items;
         if (searchParam.getParam() != null) {
-            items = itemRepository.findAllByNameLike("%" + searchParam.getParam() + "%", pageRequest);
+            items = itemRepository.findAllByNameContaining(searchParam.getParam(), pageRequest);
         } else {
             items = itemRepository.findAll(pageRequest);
         }
@@ -69,8 +69,8 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item getItem(Item item) {
-        Item d = itemRepository.findById(item.getId());
-        return d;
+        Item i = itemRepository.findById(item.getId());
+        return i;
     }
 
     public Map<String, Object> items(Page<Item> items){

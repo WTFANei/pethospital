@@ -9,5 +9,5 @@ public interface ItemRepository extends JpaRepository<Item, String> {
 
     Item findById(String id);
 
-    Page<Item> findAllByNameLike(String name, Pageable pageable);
+    Page<Item> findAllByNameContaining(String name, Pageable pageable);
 }

@@ -90,7 +90,7 @@ public class DoctorServiceImpl implements DoctorService {
         PageRequest pageRequest = new PageRequest(searchParam.getPage(), searchParam.getSize());
         Page<Doctor> doctors;
         if (searchParam.getParam() != null) {
-            doctors = doctorRepository.findAllByNameLike("%" + searchParam.getParam() + "%", pageRequest);
+            doctors = doctorRepository.findAllByNameContaining(searchParam.getParam(), pageRequest);
         } else {
             doctors = doctorRepository.findAll(pageRequest);
         }

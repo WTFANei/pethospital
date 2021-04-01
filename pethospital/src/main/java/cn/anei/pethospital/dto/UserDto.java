@@ -9,25 +9,13 @@ import java.util.Date;
 @Data
 public class UserDto {
 
-    private String uid;
+    private String id;
+    private String phone;
     private String name;
-    private String realName;
-    private String email;
-    private String cardNum;
-    private String cardPic;
-    private Date birth;
-    private String sex;
-    private Integer type;
 
     public UserDto(User user){
-//        this.uid = user.getUid();
-//        this.name = user.getName();
-//        this.realName = user.getRealName();
-//        this.email = user.getEmail();
-//        this.cardNum = user.getCardNum();
-//        this.cardPic = user.getCardPic();
-//        this.birth = user.getBirth();
-//        this.sex = user.getSex();
-//        this.type = user.getType();
+        this.id = user.getId();
+        this.phone = user.getPhone();
+        this.name = user.getName();
     }
 }

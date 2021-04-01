@@ -6,13 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, String> {
-    User findByNameAndPwd(String name,String pwd);
+    User findByPhoneAndPwd(String phone,String pwd);
 
-    User findByName(String name);
+    User findByPhone(String phone);
 
-    Page<User> findAllByNameLike(String name, Pageable pageable);
+    Page<User> findAllByPhoneContaining(String phone, Pageable pageable);
 
-    Page<User> findAllByType(Integer type, Pageable pageable);
-
-    User findByUid(String uid);
+    User findById(String id);
 }

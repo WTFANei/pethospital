@@ -9,5 +9,5 @@ public interface PetRepository extends JpaRepository<Pet, String> {
 
     Pet findById(String id);
 
-    Page<Pet> findAllByUid(String uid, Pageable pageable);
+    Page<Pet> findAllByNameContaining(String name, Pageable pageable);
 }

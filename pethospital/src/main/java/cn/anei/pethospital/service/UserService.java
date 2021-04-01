@@ -12,21 +12,14 @@ public interface UserService {
 
     Boolean register(User user);
 
-    Boolean updateInfo(User user);
+    Boolean modifyPwd(RePwdParam rePwdParam, User user);
 
-    Boolean becomeAuthor(User user);
+    Boolean userDelete(String id);
+
+    Boolean userModify(User user);
 
     Map<String, Object> getUsers(SearchParam searchParam);
 
     User getUser(User user);
 
-    Map<String, Object> getCheckUsers(SearchParam searchParam);
-
-    Boolean removeUserByuid(String uid);
-
-    Boolean modifyPwd(RePwdParam rePwdParam, User user);
-
-    Boolean accessUserByuid(String uid);
-
-    Boolean notAccessUserByuid(String uid);
 }

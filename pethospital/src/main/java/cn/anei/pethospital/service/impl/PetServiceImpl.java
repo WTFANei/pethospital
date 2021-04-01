@@ -41,13 +41,13 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public Boolean petModify(Pet pet) {
-        Pet d = petRepository.findOne(pet.getId());
-        if (d!=null){
-            d.setName(pet.getName());
-            d.setAge(pet.getAge());
-            d.setSex(pet.getSex());
+        Pet p = petRepository.findOne(pet.getId());
+        if (p!=null){
+            p.setName(pet.getName());
+            p.setAge(pet.getAge());
+            p.setSex(pet.getSex());
             try{
-                petRepository.save(d);
+                petRepository.save(p);
                 return true;
             }catch (Exception e){
                 return false;
@@ -61,7 +61,7 @@ public class PetServiceImpl implements PetService {
         PageRequest pageRequest = new PageRequest(searchParam.getPage(), searchParam.getSize());
         Page<Pet> pets;
         if (searchParam.getParam() != null) {
-            pets = petRepository.findAllByUid(searchParam.getParam(), pageRequest);
+            pets = petRepository.findAllByNameContaining(searchParam.getParam(), pageRequest);
         } else {
             pets = petRepository.findAll(pageRequest);
         }
@@ -70,8 +70,8 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public Pet getPet(Pet pet) {
-        Pet d = petRepository.findById(pet.getId());
-        return d;
+        Pet p = petRepository.findById(pet.getId());
+        return p;
     }
 
     public Map<String, Object> pets(Page<Pet> pets){
