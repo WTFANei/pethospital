@@ -1,6 +1,6 @@
 package cn.anei.pethospital.dto;
 
-import cn.anei.pethospital.entity.Item;
+import cn.anei.pethospital.entity.Medicine;
 import lombok.Data;
 
 
@@ -14,11 +14,11 @@ public class MedicineDto {
     private Double price;
 
 
-    public MedicineDto(Item item) {
-        this.id = item.getId();
-        this.name = item.getName();
-        this.text = item.getText();
-        this.num = item.getNum();
-        this.price = item.getPrice();
+    public MedicineDto(Medicine midicine) {
+        this.id = midicine.getId();
+        this.name = midicine.getName();
+        this.text = midicine.getText();
+        this.num = midicine.getNum();
+        this.price = midicine.getPrice();
     }
 }
