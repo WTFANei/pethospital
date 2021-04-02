@@ -21,7 +21,7 @@ public class Prescription {
     private String oid;
     @Column(name = "medicine_id",length = 32)
     private String mid;
-    @Column(name = "medicine_num",length = 5)
+    @Column(name = "medicine_num",length = 4)
     private Integer mnum;
     @Column(name = "count_price")
     private Double cpirce;

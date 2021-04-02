@@ -20,7 +20,7 @@ public class Medicine {
     private String name;
     @Column(name = "medicine_text",length = 500)
     private String text;
-    @Column(name = "medicine_num",length = 500)
+    @Column(name = "medicine_num",length = 4)
     private Integer num;
     @Column(name = "medicine_price")
     private Double price;
