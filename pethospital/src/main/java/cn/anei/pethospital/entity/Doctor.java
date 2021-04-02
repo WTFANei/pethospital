@@ -19,7 +19,7 @@ public class Doctor {
     private String id;
     @Column(name = "doctor_account",length = 32)
     private String account;
-    @Column(name = "doctor_name",length = 30)
+    @Column(name = "doctor_name",length = 32)
     private String name;
     @Column(name = "doctor_pwd",length = 32)
     private String pwd;
