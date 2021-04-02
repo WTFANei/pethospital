@@ -45,6 +45,8 @@ public class MedicineServiceImpl implements MedicineService {
         if (m!=null){
             m.setName(medicine.getName());
             m.setText(medicine.getText());
+            m.setNum(medicine.getNum());
+            m.setPrice(medicine.getPrice());
             try{
                 medicineRepository.save(m);
                 return true;
