@@ -20,7 +20,7 @@ public class Admin {
     private String account;
     @Column(name = "admin_name",length = 32)
     private String name;
-    @Column(name = "admin_pwd",length = 32)
+    @Column(name = "admin_pwd",length = 16)
     private String pwd;
 
 }

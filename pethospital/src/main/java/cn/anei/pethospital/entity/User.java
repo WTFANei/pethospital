@@ -20,6 +20,6 @@ public class User {
     private String phone;
     @Column(name = "user_name",length = 30)
     private String name;
-    @Column(name = "user_pwd",length = 32)
+    @Column(name = "user_pwd",length = 16)
     private String pwd;
 }

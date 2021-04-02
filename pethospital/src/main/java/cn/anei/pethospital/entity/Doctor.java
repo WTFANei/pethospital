@@ -21,7 +21,7 @@ public class Doctor {
     private String account;
     @Column(name = "doctor_name",length = 32)
     private String name;
-    @Column(name = "doctor_pwd",length = 32)
+    @Column(name = "doctor_pwd",length = 16)
     private String pwd;
     @Column(name = "doctor_birth")
     private Date birth;
