@@ -25,7 +25,7 @@ public class DoctorServiceImpl implements DoctorService {
     public Doctor existDoctor(Doctor doctor) {
         Doctor d = doctorRepository.findByAccountAndPwd(doctor.getAccount(), doctor.getPwd());
         if (d!=null) {
-            d.setName(null);
+            d.setPwd(null);
             return d;
         }
         return null;

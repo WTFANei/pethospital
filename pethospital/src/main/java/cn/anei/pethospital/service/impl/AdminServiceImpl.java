@@ -20,7 +20,7 @@ public class AdminServiceImpl implements AdminService {
     private AdminRepository adminRepository;
     @Override
     public Admin existUser(Admin admin) {
-        Admin a = adminRepository.findByAccountAndPwd(admin.getName(), admin.getPwd());
+        Admin a = adminRepository.findByAccountAndPwd(admin.getAccount(), admin.getPwd());
         if (a!=null) {
             a.setPwd(null);
             return a;
