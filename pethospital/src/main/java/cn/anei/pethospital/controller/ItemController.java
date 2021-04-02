@@ -1,4 +1,4 @@
-package cn.anei.itemhospital.controller;
+package cn.anei.pethospital.controller;
 
 import cn.anei.pethospital.entity.Item;
 import cn.anei.pethospital.param.SearchParam;
