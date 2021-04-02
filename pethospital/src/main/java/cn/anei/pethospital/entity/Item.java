@@ -16,7 +16,7 @@ public class Item {
     @GeneratedValue(generator = "jpa-uuid")
     @Column(name = "item_id",length = 32)
     private String id;
-    @Column(name = "item_name",length = 30)
+    @Column(name = "item_name",length = 32)
     private String name;
     @Column(name = "item_text",length = 500)
     private String text;

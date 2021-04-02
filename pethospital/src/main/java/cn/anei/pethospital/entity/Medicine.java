@@ -16,7 +16,7 @@ public class Medicine {
     @GeneratedValue(generator = "jpa-uuid")
     @Column(name = "medicine_id",length = 32)
     private String id;
-    @Column(name = "medicine_name",length = 50)
+    @Column(name = "medicine_name",length = 32)
     private String name;
     @Column(name = "medicine_text",length = 500)
     private String text;
