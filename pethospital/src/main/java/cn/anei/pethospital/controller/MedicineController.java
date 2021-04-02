@@ -22,7 +22,7 @@ public class MedicineController {
     private MedicineService medicineService;
 
     @PostMapping("/medicineAdd")
-    public ResultVO medicineADD(@RequestBody @Valid Medicine medicine) {
+    public ResultVO medicineAdd(@RequestBody @Valid Medicine medicine) {
         return medicineService.medicineAdd(medicine)? ResultVOUtil.success("新增成功！"):ResultVOUtil.error(1,"新增失败！");
     }
 

@@ -22,7 +22,7 @@ public class ItemController {
     private ItemService itemService;
 
     @PostMapping("/itemAdd")
-    public ResultVO itemADD(@RequestBody @Valid Item item) {
+    public ResultVO itemAdd(@RequestBody @Valid Item item) {
         return itemService.itemAdd(item)? ResultVOUtil.success("新增成功！"):ResultVOUtil.error(1,"新增失败！");
     }
 

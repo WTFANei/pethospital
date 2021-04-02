@@ -22,7 +22,7 @@ public class PetController {
     private PetService petService;
 
     @PostMapping("/petAdd")
-    public ResultVO petADD(@RequestBody @Valid Pet pet) {
+    public ResultVO petAdd(@RequestBody @Valid Pet pet) {
         return petService.petAdd(pet)? ResultVOUtil.success("新增成功！"):ResultVOUtil.error(1,"新增失败！");
     }
 

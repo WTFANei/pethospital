@@ -41,7 +41,7 @@ public class DoctorController {
     }
 
     @PostMapping("/doctorAdd")
-    public ResultVO doctorADD(@RequestBody @Valid Doctor doctor) {
+    public ResultVO doctorAdd(@RequestBody @Valid Doctor doctor) {
         return doctorService.doctorAdd(doctor)? ResultVOUtil.success("新增成功！"):ResultVOUtil.error(1,"新增失败！");
     }
 
