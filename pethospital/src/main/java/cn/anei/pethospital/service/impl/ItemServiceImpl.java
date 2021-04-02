@@ -34,7 +34,12 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Boolean itemDelete(String id) {
-        itemRepository.delete(id);
+        try {
+            itemRepository.delete(id);
+        }
+        catch (Exception e){
+            return true;
+        }
         return itemRepository.exists(id) ? true : false;
     }
 

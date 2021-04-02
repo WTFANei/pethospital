@@ -64,7 +64,12 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Boolean doctorDelete(String id) {
-        doctorRepository.delete(id);
+        try {
+            doctorRepository.delete(id);
+        }
+        catch (Exception e){
+            return true;
+        }
         return doctorRepository.exists(id) ? true : false;
     }
 

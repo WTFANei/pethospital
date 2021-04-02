@@ -34,7 +34,12 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public Boolean petDelete(String id) {
-        petRepository.delete(id);
+        try {
+            petRepository.delete(id);
+        }
+        catch (Exception e){
+            return true;
+        }
         return petRepository.exists(id) ? true : false;
     }
 

@@ -96,7 +96,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean userDelete(String id) {
-        userRepository.delete(id);
+        try {
+            userRepository.delete(id);
+        }
+        catch (Exception e){
+            return true;
+        }
         return userRepository.exists(id) ? true : false;
     }
 

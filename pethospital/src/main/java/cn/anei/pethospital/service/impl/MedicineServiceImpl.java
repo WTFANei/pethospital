@@ -34,7 +34,12 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Override
     public Boolean medicineDelete(String id) {
-        medicineRepository.delete(id);
+        try {
+            medicineRepository.delete(id);
+        }
+        catch (Exception e){
+            return true;
+        }
         return medicineRepository.exists(id) ? true : false;
     }
 
