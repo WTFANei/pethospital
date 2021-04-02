@@ -44,8 +44,8 @@ public class PetController {
 
     @PostMapping("/getPet")
     public ResultVO getPet(@RequestBody @Valid Pet pet) {
-        Pet d = petService.getPet(pet);
-        return d != null ? ResultVOUtil.success(d) : ResultVOUtil.error(1, "信息获取失败！");
+        Pet p = petService.getPet(pet);
+        return p != null ? ResultVOUtil.success(p) : ResultVOUtil.error(1, "信息获取失败！");
     }
 
 }

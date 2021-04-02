@@ -44,8 +44,8 @@ public class ItemController {
 
     @PostMapping("/getItem")
     public ResultVO getItem(@RequestBody @Valid Item item) {
-        Item d = itemService.getItem(item);
-        return d != null ? ResultVOUtil.success(d) : ResultVOUtil.error(1, "信息获取失败！");
+        Item i = itemService.getItem(item);
+        return i != null ? ResultVOUtil.success(i) : ResultVOUtil.error(1, "信息获取失败！");
     }
 
 }

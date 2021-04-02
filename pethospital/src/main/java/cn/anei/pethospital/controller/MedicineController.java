@@ -44,8 +44,8 @@ public class MedicineController {
 
     @PostMapping("/getMedicine")
     public ResultVO getMedicine(@RequestBody @Valid Medicine medicine) {
-        Medicine d = medicineService.getMedicine(medicine);
-        return d != null ? ResultVOUtil.success(d) : ResultVOUtil.error(1, "信息获取失败！");
+        Medicine m = medicineService.getMedicine(medicine);
+        return m != null ? ResultVOUtil.success(m) : ResultVOUtil.error(1, "信息获取失败！");
     }
 
 }

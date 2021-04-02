@@ -58,8 +58,8 @@ public class UserController {
 
     @PostMapping("/getUser")
     public ResultVO getUser(@RequestBody @Valid User user) {
-        User d = userService.getUser(user);
-        return d != null ? ResultVOUtil.success(d) : ResultVOUtil.error(1, "信息获取失败！");
+        User u = userService.getUser(user);
+        return u != null ? ResultVOUtil.success(u) : ResultVOUtil.error(1, "信息获取失败！");
     }
 
     @PostMapping("/register")
