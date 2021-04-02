@@ -19,7 +19,7 @@ public class Order {
     private String id;
     @Column(name = "item_id",length = 32)
     private String iid;
-    @Column(name = "user_id",length = 11)
+    @Column(name = "user_id",length = 32)
     private String uid;
     @Column(name = "pet_id",length = 32)
     private String pid;
