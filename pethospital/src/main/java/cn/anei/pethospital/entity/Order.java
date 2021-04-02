@@ -25,7 +25,7 @@ public class Order {
     private String pid;
     @Column(name = "doctor_id",length = 32)
     private String did;
-    @Column(name = "order_text",length = 1000)
+    @Column(name = "order_text",length = 500)
     private String text;
     @Column(name = "order_time")
     private Date otime;
