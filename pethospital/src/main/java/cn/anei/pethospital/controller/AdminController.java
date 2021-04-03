@@ -13,11 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-/**
- * @Author: ANei
- * @Date: 下午2:59 18/3/6
- * @Description:
- */
 @RestController
 //@RequestMapping("/api")
 public class AdminController {
