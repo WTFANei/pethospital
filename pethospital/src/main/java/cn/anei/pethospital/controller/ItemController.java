@@ -2,6 +2,7 @@ package cn.anei.pethospital.controller;
 
 import cn.anei.pethospital.entity.Item;
 import cn.anei.pethospital.param.SearchParam;
+import cn.anei.pethospital.param.SearchParamItem;
 import cn.anei.pethospital.service.ItemService;
 import cn.anei.pethospital.util.ResultVOUtil;
 import cn.anei.pethospital.vo.ResultVO;
@@ -48,4 +49,9 @@ public class ItemController {
         return i != null ? ResultVOUtil.success(i) : ResultVOUtil.error(1, "信息获取失败！");
     }
 
+    @PostMapping("/getItemsByCond")
+    public ResultVO getItemsByCond(@RequestBody @Valid SearchParamItem searchParamItem) {
+        Map<String, Object> items = itemService.getItemsByCond(searchParamItem);
+        return items != null ? ResultVOUtil.success(items) : ResultVOUtil.error(1, "信息获取失败！");
+    }
 }

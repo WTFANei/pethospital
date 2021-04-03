@@ -3,6 +3,7 @@ package cn.anei.pethospital.controller;
 import cn.anei.pethospital.entity.User;
 import cn.anei.pethospital.param.RePwdParam;
 import cn.anei.pethospital.param.SearchParam;
+import cn.anei.pethospital.param.SearchParamUser;
 import cn.anei.pethospital.service.UserService;
 import cn.anei.pethospital.util.ResultVOUtil;
 import cn.anei.pethospital.vo.ResultVO;
@@ -65,5 +66,11 @@ public class UserController {
     @PostMapping("/register")
     public ResultVO register(@RequestBody @Valid User user) {
         return userService.register(user)? ResultVOUtil.success("注册成功！"):ResultVOUtil.error(1,"注册失败！");
+    }
+
+    @PostMapping("/getUsersByCond")
+    public ResultVO getPetsByCond(@RequestBody @Valid SearchParamUser searchParamUser) {
+        Map<String, Object> users = userService.getUsersByCond(searchParamUser);
+        return users != null ? ResultVOUtil.success(users) : ResultVOUtil.error(1, "信息获取失败！");
     }
 }

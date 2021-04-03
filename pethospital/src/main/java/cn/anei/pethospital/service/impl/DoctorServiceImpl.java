@@ -4,13 +4,20 @@ import cn.anei.pethospital.dto.DoctorDto;
 import cn.anei.pethospital.entity.Doctor;
 import cn.anei.pethospital.param.RePwdParam;
 import cn.anei.pethospital.param.SearchParam;
+import cn.anei.pethospital.param.SearchParamDoctor;
 import cn.anei.pethospital.repository.DoctorRepository;
 import cn.anei.pethospital.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -99,6 +106,31 @@ public class DoctorServiceImpl implements DoctorService {
         } else {
             doctors = doctorRepository.findAll(pageRequest);
         }
+        return doctors(doctors);
+    }
+
+    @Override
+    public Map<String, Object> getDoctorsByCond(SearchParamDoctor searchParamDoctor) {
+        PageRequest pageRequest = new PageRequest(searchParamDoctor.getPage(), searchParamDoctor.getSize());
+        Doctor cond = searchParamDoctor.getDoctor();
+        if(cond != null){
+            Specification<Doctor> query = new Specification<Doctor>() {
+                @Override
+                public Predicate toPredicate(Root<Doctor> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                    List<Predicate> predicates = new ArrayList<>();
+                    if(!StringUtils.isEmpty(cond.getAccount())){
+                        predicates.add(criteriaBuilder.like(root.get("account"), "%" + cond.getAccount() + "%"));
+                    }
+                    if(!StringUtils.isEmpty(cond.getName())){
+                        predicates.add(criteriaBuilder.like(root.get("name"), "%" + cond.getName() + "%"));
+                    }
+                    return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+                }
+            };
+            Page<Doctor> doctors = doctorRepository.findAll(query,pageRequest);
+            return doctors(doctors);
+        }
+        Page<Doctor> doctors = doctorRepository.findAll(pageRequest);
         return doctors(doctors);
     }
 

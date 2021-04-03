@@ -3,13 +3,21 @@ package cn.anei.pethospital.service.impl;
 import cn.anei.pethospital.dto.ItemDto;
 import cn.anei.pethospital.entity.Item;
 import cn.anei.pethospital.param.SearchParam;
+import cn.anei.pethospital.param.SearchParamItem;
 import cn.anei.pethospital.repository.ItemRepository;
 import cn.anei.pethospital.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,6 +79,32 @@ public class ItemServiceImpl implements ItemService {
         }
         return items(items);
     }
+
+    @Override
+    public Map<String, Object> getItemsByCond(SearchParamItem searchParamItem) {
+        PageRequest pageRequest = new PageRequest(searchParamItem.getPage(), searchParamItem.getSize());
+        Item cond = searchParamItem.getItem();
+        if(cond != null){
+            Specification<Item> query = new Specification<Item>() {
+                @Override
+                public Predicate toPredicate(Root<Item> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                    List<Predicate> predicates = new ArrayList<>();
+                    if(!StringUtils.isEmpty(cond.getName())){
+                        predicates.add(criteriaBuilder.like(root.get("name"), "%" + cond.getName() + "%"));
+                    }
+                    if(!StringUtils.isEmpty(cond.getText())){
+                        predicates.add(criteriaBuilder.like(root.get("text"), "%" + cond.getText() + "%"));
+                    }
+                    return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+                }
+            };
+            Page<Item> items = itemRepository.findAll(query,pageRequest);
+            return items(items);
+        }
+        Page<Item> items = itemRepository.findAll(pageRequest);
+        return items(items);
+    }
+
 
     @Override
     public Item getItem(Item item) {

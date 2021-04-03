@@ -3,13 +3,20 @@ package cn.anei.pethospital.service.impl;
 import cn.anei.pethospital.dto.PetDto;
 import cn.anei.pethospital.entity.Pet;
 import cn.anei.pethospital.param.SearchParam;
+import cn.anei.pethospital.param.SearchParamPet;
 import cn.anei.pethospital.repository.PetRepository;
 import cn.anei.pethospital.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,6 +77,34 @@ public class PetServiceImpl implements PetService {
         } else {
             pets = petRepository.findAll(pageRequest);
         }
+        return pets(pets);
+    }
+
+    @Override
+    public Map<String, Object> getPetsByCond(SearchParamPet searchParamPet) {
+        PageRequest pageRequest = new PageRequest(searchParamPet.getPage(), searchParamPet.getSize());
+        Pet cond = searchParamPet.getPet();
+        if(cond != null){
+            Specification<Pet> query = new Specification<Pet>() {
+                @Override
+                public Predicate toPredicate(Root<Pet> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                    List<Predicate> predicates = new ArrayList<>();
+                    if(!StringUtils.isEmpty(cond.getName())){
+                        predicates.add(criteriaBuilder.like(root.get("name"), "%" + cond.getName() + "%"));
+                    }
+                    if(!StringUtils.isEmpty(cond.getAge())){
+                        predicates.add(criteriaBuilder.equal(root.get("age"), cond.getAge()));
+                    }
+                    if(!StringUtils.isEmpty(cond.getSex())){
+                        predicates.add(criteriaBuilder.equal(root.get("sex"), cond.getSex()));
+                    }
+                    return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+                }
+            };
+            Page<Pet> pets = petRepository.findAll(query,pageRequest);
+            return pets(pets);
+        }
+        Page<Pet> pets = petRepository.findAll(pageRequest);
         return pets(pets);
     }
 

@@ -4,13 +4,20 @@ import cn.anei.pethospital.param.RePwdParam;
 import cn.anei.pethospital.param.SearchParam;
 import cn.anei.pethospital.dto.UserDto;
 import cn.anei.pethospital.entity.User;
+import cn.anei.pethospital.param.SearchParamUser;
 import cn.anei.pethospital.repository.UserRepository;
 import cn.anei.pethospital.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,6 +60,31 @@ public class UserServiceImpl implements UserService {
         } else {
             users = userRepository.findAll(pageRequest);
         }
+        return users(users);
+    }
+
+    @Override
+    public Map<String, Object> getUsersByCond(SearchParamUser searchParamUser) {
+        PageRequest pageRequest = new PageRequest(searchParamUser.getPage(), searchParamUser.getSize());
+        User cond = searchParamUser.getUser();
+        if(cond != null){
+            Specification<User> query = new Specification<User>() {
+                @Override
+                public Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                    List<Predicate> predicates = new ArrayList<>();
+                    if(!StringUtils.isEmpty(cond.getName())){
+                        predicates.add(criteriaBuilder.like(root.get("name"), "%" + cond.getName() + "%"));
+                    }
+                    if(!StringUtils.isEmpty(cond.getPhone())){
+                        predicates.add(criteriaBuilder.like(root.get("phone"), "%" + cond.getPhone() + "%"));
+                    }
+                    return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+                }
+            };
+            Page<User> users = userRepository.findAll(query,pageRequest);
+            return users(users);
+        }
+        Page<User> users = userRepository.findAll(pageRequest);
         return users(users);
     }
 

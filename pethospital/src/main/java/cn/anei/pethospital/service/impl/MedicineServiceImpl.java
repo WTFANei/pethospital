@@ -3,13 +3,20 @@ package cn.anei.pethospital.service.impl;
 import cn.anei.pethospital.dto.MedicineDto;
 import cn.anei.pethospital.entity.Medicine;
 import cn.anei.pethospital.param.SearchParam;
+import cn.anei.pethospital.param.SearchParamMedicine;
 import cn.anei.pethospital.repository.MedicineRepository;
 import cn.anei.pethospital.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,6 +78,31 @@ public class MedicineServiceImpl implements MedicineService {
         } else {
             medicines = medicineRepository.findAll(pageRequest);
         }
+        return medicines(medicines);
+    }
+
+    @Override
+    public Map<String, Object> getMedicinesByCond(SearchParamMedicine searchParamMedicine) {
+        PageRequest pageRequest = new PageRequest(searchParamMedicine.getPage(), searchParamMedicine.getSize());
+        Medicine cond = searchParamMedicine.getMedicine();
+        if(cond != null){
+            Specification<Medicine> query = new Specification<Medicine>() {
+                @Override
+                public Predicate toPredicate(Root<Medicine> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                    List<Predicate> predicates = new ArrayList<>();
+                    if(!StringUtils.isEmpty(cond.getName())){
+                        predicates.add(criteriaBuilder.like(root.get("name"), "%" + cond.getName() + "%"));
+                    }
+                    if(!StringUtils.isEmpty(cond.getText())){
+                        predicates.add(criteriaBuilder.like(root.get("text"), "%" + cond.getText() + "%"));
+                    }
+                    return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+                }
+            };
+            Page<Medicine> medicines = medicineRepository.findAll(query,pageRequest);
+            return medicines(medicines);
+        }
+        Page<Medicine> medicines = medicineRepository.findAll(pageRequest);
         return medicines(medicines);
     }
 

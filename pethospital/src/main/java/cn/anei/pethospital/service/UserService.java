@@ -3,6 +3,7 @@ package cn.anei.pethospital.service;
 import cn.anei.pethospital.param.RePwdParam;
 import cn.anei.pethospital.param.SearchParam;
 import cn.anei.pethospital.entity.User;
+import cn.anei.pethospital.param.SearchParamUser;
 
 import java.util.Map;
 
@@ -19,6 +20,9 @@ public interface UserService {
     Boolean userModify(User user);
 
     Map<String, Object> getUsers(SearchParam searchParam);
+
+    Map<String, Object> getUsersByCond(SearchParamUser searchParamUser);
+
 
     User getUser(User user);
 
