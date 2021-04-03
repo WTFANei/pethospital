@@ -1,6 +1,7 @@
 package cn.anei.pethospital.service;
 
 import cn.anei.pethospital.entity.Order;
+import cn.anei.pethospital.param.OrderCommitParam;
 import cn.anei.pethospital.param.SearchParam;
 import cn.anei.pethospital.param.SearchParamOrder;
 
@@ -9,6 +10,8 @@ import java.util.Map;
 public interface OrderService {
 
     Boolean orderAdd(Order order);
+
+    Boolean orderCommit(OrderCommitParam orderCommitParam);
 
     Boolean orderDelete(String id);
 

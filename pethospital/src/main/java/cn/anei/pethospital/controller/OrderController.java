@@ -1,6 +1,7 @@
 package cn.anei.pethospital.controller;
 
 import cn.anei.pethospital.entity.Order;
+import cn.anei.pethospital.param.OrderCommitParam;
 import cn.anei.pethospital.param.SearchParam;
 import cn.anei.pethospital.param.SearchParamOrder;
 import cn.anei.pethospital.service.OrderService;
@@ -25,6 +26,11 @@ public class OrderController {
     @PostMapping("/orderAdd")
     public ResultVO orderAdd(@RequestBody @Valid Order order) {
         return orderService.orderAdd(order)? ResultVOUtil.success("新增成功！"):ResultVOUtil.error(1,"新增失败！");
+    }
+
+    @PostMapping("/orderCommit")
+    public ResultVO orderCommit(@RequestBody @Valid OrderCommitParam orderCommitParam) {
+        return orderService.orderCommit(orderCommitParam)? ResultVOUtil.success("提交成功！"):ResultVOUtil.error(1,"提交失败！");
     }
 
     @PostMapping("/orderDelete")

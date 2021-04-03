@@ -1,10 +1,15 @@
 package cn.anei.pethospital.service.impl;
 
 import cn.anei.pethospital.dto.OrderDto;
+import cn.anei.pethospital.entity.Medicine;
 import cn.anei.pethospital.entity.Order;
+import cn.anei.pethospital.entity.Prescription;
+import cn.anei.pethospital.param.OrderCommitParam;
 import cn.anei.pethospital.param.SearchParam;
 import cn.anei.pethospital.param.SearchParamOrder;
+import cn.anei.pethospital.repository.MedicineRepository;
 import cn.anei.pethospital.repository.OrderRepository;
+import cn.anei.pethospital.repository.PrescriptionRepository;
 import cn.anei.pethospital.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,6 +30,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+    private PrescriptionRepository prescriptionRepository;
+    private MedicineRepository medicineRepository;
 
     @Override
     public Boolean orderAdd(Order order) {
@@ -32,6 +39,31 @@ public class OrderServiceImpl implements OrderService {
             return false;
         }else {
             orderRepository.save(order);
+            return true;
+        }
+    }
+
+    @Override
+    public Boolean orderCommit(OrderCommitParam orderCommitParam) {
+        Order order = orderCommitParam.getOrder();
+        List<Prescription> prescriptionList = orderCommitParam.getPrescriptionList();
+        String orderId = order.getId();
+
+        if (orderRepository.findById(orderId)!=null) {
+            return false;
+        }else {
+            orderRepository.save(order);
+            for (int i = 0 ; i < prescriptionList.size() ; i++){
+                Prescription prescription = prescriptionList.get(i);
+                prescription.setOid(orderId);
+//                String mid = prescription.getMid();
+//                Integer mnum = prescription.getMnum();
+//                Medicine medicine = medicineRepository.findById(mid);
+//                Double medicinePrice = medicine.getPrice();
+//                Double cprice = medicinePrice * mnum;
+//                prescription.setCpirce(cprice);
+                prescriptionRepository.save(prescription);
+            }
             return true;
         }
     }
