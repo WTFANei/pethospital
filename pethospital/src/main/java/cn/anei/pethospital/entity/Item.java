@@ -20,9 +20,5 @@ public class Item {
     private String name;
     @Column(name = "item_text",length = 500)
     private String text;
-    @Column(name = "item_num")
-    private Integer num;
-    @Column(name = "item_price")
-    private Double price;
 
 }
