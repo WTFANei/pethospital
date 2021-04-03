@@ -18,7 +18,7 @@ public class User {
     private String id;
     @Column(name = "user_phone",length = 11)
     private String phone;
-    @Column(name = "user_name",length = 30)
+    @Column(name = "user_name",length = 32)
     private String name;
     @Column(name = "user_pwd",length = 16)
     private String pwd;
