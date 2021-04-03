@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Map;
 
@@ -24,22 +25,38 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("/orderAdd")
-    public ResultVO orderAdd(@RequestBody @Valid Order order) {
-        return orderService.orderAdd(order)? ResultVOUtil.success("新增成功！"):ResultVOUtil.error(1,"新增失败！");
+    public ResultVO orderAdd(@RequestBody @Valid Order order, HttpSession session) {
+        Object sess = session.getAttribute("user");
+        if(null == sess){
+            return ResultVOUtil.error(1,"用户请先登录！"); //越权操作，跳转到用户登录界面
+        }
+        return orderService.orderAdd(order)? ResultVOUtil.success("预约成功！"):ResultVOUtil.error(1,"预约失败！");
     }
 
     @PostMapping("/orderCommit")
-    public ResultVO orderCommit(@RequestBody @Valid OrderCommitParam orderCommitParam) {
+    public ResultVO orderCommit(@RequestBody @Valid OrderCommitParam orderCommitParam, HttpSession session) {
+        Object sess = session.getAttribute("doctor");
+        if(null == sess){
+            return ResultVOUtil.error(1,"医生请先登录！"); //越权操作，跳转到医生登录界面
+        }
         return orderService.orderCommit(orderCommitParam)? ResultVOUtil.success("提交成功！"):ResultVOUtil.error(1,"提交失败！");
     }
 
     @PostMapping("/orderDelete")
-    public ResultVO orderDelete(@RequestParam("id") String orderId) {
+    public ResultVO orderDelete(@RequestParam("id") String orderId, HttpSession session) {
+        Object sess = session.getAttribute("admin");
+        if(null == sess){
+            return ResultVOUtil.error(1,"管理员请先登录！"); //越权操作，跳转到管理员登录界面
+        }
         return orderService.orderDelete(orderId)? ResultVOUtil.error(1, "删除失败！") : ResultVOUtil.success("删除成功！");
 
     }
     @PostMapping("/orderModify")
-    public ResultVO orderModify(@RequestBody @Valid Order order) {
+    public ResultVO orderModify(@RequestBody @Valid Order order, HttpSession session) {
+        Object sess = session.getAttribute("admin");
+        if(null == sess){
+            return ResultVOUtil.error(1,"管理员请先登录！"); //越权操作，跳转到管理员登录界面
+        }
         return orderService.orderModify(order)? ResultVOUtil.success("修改成功！"):ResultVOUtil.error(1,"修改失败！");
     }
 

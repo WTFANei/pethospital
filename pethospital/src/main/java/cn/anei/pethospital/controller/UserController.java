@@ -42,12 +42,21 @@ public class UserController {
     }
 
     @PostMapping("/userDelete")
-    public ResultVO userDelete(@RequestParam("id") String userId) {
+    public ResultVO userDelete(@RequestParam("id") String userId, HttpSession session) {
+        Object sess = session.getAttribute("admin");
+        if(null == sess){
+            return ResultVOUtil.error(1,"管理员请先登录！"); //越权操作，跳转到管理员登录界面
+        }
         return userService.userDelete(userId)? ResultVOUtil.error(1, "删除失败！") : ResultVOUtil.success("删除成功！");
 
     }
     @PostMapping("/userModify")
-    public ResultVO userModify(@RequestBody @Valid User user) {
+    public ResultVO userModify(@RequestBody @Valid User user, HttpSession session) {
+        Object sess = session.getAttribute("user");
+        Object sess1 = session.getAttribute("admin");
+        if(null == sess && null == sess1){
+            return ResultVOUtil.error(1,"用户请先登录！"); //越权操作，跳转到用户登录界面
+        }
         return userService.userModify(user)? ResultVOUtil.success("修改成功！"):ResultVOUtil.error(1,"修改失败！");
     }
 

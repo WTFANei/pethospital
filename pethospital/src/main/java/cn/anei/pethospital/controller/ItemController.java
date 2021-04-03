@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Map;
 
@@ -23,17 +24,29 @@ public class ItemController {
     private ItemService itemService;
 
     @PostMapping("/itemAdd")
-    public ResultVO itemAdd(@RequestBody @Valid Item item) {
+    public ResultVO itemAdd(@RequestBody @Valid Item item, HttpSession session) {
+        Object sess = session.getAttribute("admin");
+        if(null == sess){
+            return ResultVOUtil.error(1,"管理员请先登录！"); //越权操作，跳转到管理员登录界面
+        }
         return itemService.itemAdd(item)? ResultVOUtil.success("新增成功！"):ResultVOUtil.error(1,"新增失败！");
     }
 
     @PostMapping("/itemDelete")
-    public ResultVO itemDelete(@RequestParam("id") String itemId) {
+    public ResultVO itemDelete(@RequestParam("id") String itemId, HttpSession session) {
+        Object sess = session.getAttribute("admin");
+        if(null == sess){
+            return ResultVOUtil.error(1,"管理员请先登录！"); //越权操作，跳转到管理员登录界面
+        }
         return itemService.itemDelete(itemId)? ResultVOUtil.error(1, "删除失败！") : ResultVOUtil.success("删除成功！");
 
     }
     @PostMapping("/itemModify")
-    public ResultVO itemModify(@RequestBody @Valid Item item) {
+    public ResultVO itemModify(@RequestBody @Valid Item item, HttpSession session) {
+        Object sess = session.getAttribute("admin");
+        if(null == sess){
+            return ResultVOUtil.error(1,"管理员请先登录！"); //越权操作，跳转到管理员登录界面
+        }
         return itemService.itemModify(item)? ResultVOUtil.success("修改成功！"):ResultVOUtil.error(1,"修改失败！");
     }
 

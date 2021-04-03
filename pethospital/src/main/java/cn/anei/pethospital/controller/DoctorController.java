@@ -42,17 +42,29 @@ public class DoctorController {
     }
 
     @PostMapping("/doctorAdd")
-    public ResultVO doctorAdd(@RequestBody @Valid Doctor doctor) {
+    public ResultVO doctorAdd(@RequestBody @Valid Doctor doctor, HttpSession session) {
+        Object sess = session.getAttribute("admin");
+        if(null == sess){
+            return ResultVOUtil.error(1,"管理员请先登录！"); //越权操作，跳转到管理员登录界面
+        }
         return doctorService.doctorAdd(doctor)? ResultVOUtil.success("新增成功！"):ResultVOUtil.error(1,"新增失败！");
     }
 
     @PostMapping("/doctorDelete")
-    public ResultVO doctorDelete(@RequestParam("id") String doctorId) {
+    public ResultVO doctorDelete(@RequestParam("id") String doctorId, HttpSession session) {
+        Object sess = session.getAttribute("admin");
+        if(null == sess){
+            return ResultVOUtil.error(1,"管理员请先登录！"); //越权操作，跳转到管理员登录界面
+        }
         return doctorService.doctorDelete(doctorId)? ResultVOUtil.error(1, "删除失败！") : ResultVOUtil.success("删除成功！");
 
     }
     @PostMapping("/doctorModify")
-    public ResultVO doctorModify(@RequestBody @Valid Doctor doctor) {
+    public ResultVO doctorModify(@RequestBody @Valid Doctor doctor, HttpSession session) {
+        Object sess = session.getAttribute("admin");
+        if(null == sess){
+            return ResultVOUtil.error(1,"管理员请先登录！"); //越权操作，跳转到管理员登录界面
+        }
         return doctorService.doctorModify(doctor)? ResultVOUtil.success("修改成功！"):ResultVOUtil.error(1,"修改失败！");
     }
 
