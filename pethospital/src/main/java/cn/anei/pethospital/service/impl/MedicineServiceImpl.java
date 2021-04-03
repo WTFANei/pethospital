@@ -96,6 +96,9 @@ public class MedicineServiceImpl implements MedicineService {
                     if(!StringUtils.isEmpty(cond.getText())){
                         predicates.add(criteriaBuilder.like(root.get("text"), "%" + cond.getText() + "%"));
                     }
+                    if(!StringUtils.isEmpty(cond.getNum())){
+                        predicates.add(criteriaBuilder.greaterThan(root.get("num"), cond.getNum()));
+                    }
                     return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
                 }
             };

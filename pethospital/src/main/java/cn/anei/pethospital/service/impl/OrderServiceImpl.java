@@ -54,13 +54,20 @@ public class OrderServiceImpl implements OrderService {
                 for (int i = 0 ; i < prescriptionList.size() ; i++){
                     Prescription prescription = prescriptionList.get(i);
                     prescription.setOid(orderId);
-//                    String mid = prescription.getMid();
-//                    Integer mnum = prescription.getMnum();
-//                    Medicine medicine = medicineRepository.findById(mid);
-//                    Double medicinePrice = medicine.getPrice();
-//                    Double cprice = medicinePrice * mnum;
-//                    prescription.setCpirce(cprice);
+                    String mid = prescription.getMid();
+                    Integer mnum = prescription.getMnum();
+                    Medicine medicine = medicineRepository.findById(mid);
+                    Integer num = medicine.getNum();
+                    Integer remainderNum = num - mnum;
+                    if (remainderNum < 0) {
+                        return false;
+                    }
+                    Double medicinePrice = medicine.getPrice();
+                    Double cprice = medicinePrice * mnum;
+                    prescription.setCpirce(cprice);
                     prescriptionRepository.save(prescription);
+                    medicine.setNum(remainderNum);
+                    medicineRepository.save(medicine);
                 }
             }
             return true;
