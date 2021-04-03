@@ -105,7 +105,7 @@ public class OrderServiceImpl implements OrderService {
     public Map<String, Object> getOrders(SearchParam searchParam) {
         PageRequest pageRequest = new PageRequest(searchParam.getPage(), searchParam.getSize());
         Page<Order> orders;
-            orders = orderRepository.findAll(pageRequest);
+        orders = orderRepository.findAll(pageRequest);
         return orders(orders);
     }
 
