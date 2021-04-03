@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
     public Boolean modifyPwd(RePwdParam rePwdParam, User user) {
         if (user == null)
             return false;
-        User u = userRepository.findByPhoneAndPwd(user.getPhone(),rePwdParam.getUserPwd());
+        User u = userRepository.findByPhoneAndPwd(user.getPhone(),rePwdParam.getPwd());
         if (u!=null){
             u.setPwd(rePwdParam.getNewPwd());
             try{

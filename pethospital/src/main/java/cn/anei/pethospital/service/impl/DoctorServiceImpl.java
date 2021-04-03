@@ -44,7 +44,7 @@ public class DoctorServiceImpl implements DoctorService {
         if (doctor == null)
             return false;
 
-        Doctor d = doctorRepository.findByAccountAndPwd(doctor.getAccount(),rePwdParam.getUserPwd());
+        Doctor d = doctorRepository.findByAccountAndPwd(doctor.getAccount(),rePwdParam.getPwd());
         if (d!=null){
             try{
                 d.setPwd(rePwdParam.getNewPwd());

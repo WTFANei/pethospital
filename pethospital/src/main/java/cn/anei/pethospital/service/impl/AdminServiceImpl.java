@@ -34,7 +34,7 @@ public class AdminServiceImpl implements AdminService {
         if (admin == null)
             return false;
 
-        Admin a = adminRepository.findByAccountAndPwd(admin.getAccount(),rePwdParam.getUserPwd());
+        Admin a = adminRepository.findByAccountAndPwd(admin.getAccount(),rePwdParam.getPwd());
         if (a!=null){
             try{
                 a.setPwd(rePwdParam.getNewPwd());
