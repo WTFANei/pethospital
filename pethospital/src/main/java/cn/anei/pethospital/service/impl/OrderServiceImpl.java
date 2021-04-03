@@ -30,7 +30,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
     private PrescriptionRepository prescriptionRepository;
+    @Autowired
     private MedicineRepository medicineRepository;
 
     @Override
