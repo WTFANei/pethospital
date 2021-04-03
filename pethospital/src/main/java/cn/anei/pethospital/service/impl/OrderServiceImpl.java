@@ -48,23 +48,24 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderCommitParam.getOrder();
         List<Prescription> prescriptionList = orderCommitParam.getPrescriptionList();
         String orderId = order.getId();
-
-        if (orderRepository.findById(orderId)!=null) {
-            return false;
-        }else {
+        try {
             orderRepository.save(order);
-            for (int i = 0 ; i < prescriptionList.size() ; i++){
-                Prescription prescription = prescriptionList.get(i);
-                prescription.setOid(orderId);
-//                String mid = prescription.getMid();
-//                Integer mnum = prescription.getMnum();
-//                Medicine medicine = medicineRepository.findById(mid);
-//                Double medicinePrice = medicine.getPrice();
-//                Double cprice = medicinePrice * mnum;
-//                prescription.setCpirce(cprice);
-                prescriptionRepository.save(prescription);
+            if(null != prescriptionList && prescriptionList.size() !=0 ){
+                for (int i = 0 ; i < prescriptionList.size() ; i++){
+                    Prescription prescription = prescriptionList.get(i);
+                    prescription.setOid(orderId);
+//                    String mid = prescription.getMid();
+//                    Integer mnum = prescription.getMnum();
+//                    Medicine medicine = medicineRepository.findById(mid);
+//                    Double medicinePrice = medicine.getPrice();
+//                    Double cprice = medicinePrice * mnum;
+//                    prescription.setCpirce(cprice);
+                    prescriptionRepository.save(prescription);
+                }
             }
             return true;
+        }catch (Exception e){
+            return false;
         }
     }
 
