@@ -25,5 +25,5 @@ public class Pet {
     @Column(name = "pet_sex",length = 1)
     private Integer sex;
     @Column(name = "status",length = 1)
-    private Integer status;
+    private Integer status = 0;
 }

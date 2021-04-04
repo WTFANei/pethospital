@@ -26,5 +26,5 @@ public class Prescription {
     @Column(name = "count_price")
     private Double cpirce;
     @Column(name = "status",length = 1)
-    private Integer status;
+    private Integer status = 0;
 }

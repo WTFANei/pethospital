@@ -21,9 +21,9 @@ public class Medicine {
     @Column(name = "medicine_text",length = 500)
     private String text;
     @Column(name = "medicine_num",length = 4)
-    private Integer num;
+    private Integer num = 0;
     @Column(name = "medicine_price")
     private Double price;
     @Column(name = "status",length = 1)
-    private Integer status;
+    private Integer status = 0;
 }

@@ -21,5 +21,5 @@ public class Item {
     @Column(name = "item_text",length = 500)
     private String text;
     @Column(name = "status",length = 1)
-    private Integer status;
+    private Integer status = 0;
 }

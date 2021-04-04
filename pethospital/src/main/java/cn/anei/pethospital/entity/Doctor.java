@@ -26,5 +26,5 @@ public class Doctor {
     @Column(name = "doctor_birth")
     private Date birth;
     @Column(name = "status",length = 1)
-    private Integer status;
+    private Integer status = 0;
 }

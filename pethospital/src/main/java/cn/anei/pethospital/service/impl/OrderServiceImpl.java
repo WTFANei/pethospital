@@ -51,6 +51,7 @@ public class OrderServiceImpl implements OrderService {
         List<Prescription> prescriptionList = orderCommitParam.getPrescriptionList();
         String orderId = order.getId();
         try {
+            order.setFtime(new Date());
             order.setText(order.getText());
             orderRepository.save(order);
             if(null != prescriptionList && prescriptionList.size() !=0 ){

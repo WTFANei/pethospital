@@ -1,6 +1,7 @@
 package cn.anei.pethospital.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -32,7 +33,7 @@ public class Order {
     @Column(name = "finish_time")
     private Date ftime;
     @Column(name = "is_finish",length = 1)
-    private Integer isfinish;
+    private Integer isfinish = 0;
     @Column(name = "status",length = 1)
-    private Integer status;
+    private Integer status = 0;
 }
