@@ -53,6 +53,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             order.setFtime(new Date());
             order.setText(order.getText());
+            order.setIsfinish(1);
             orderRepository.save(order);
             if(null != prescriptionList && prescriptionList.size() !=0 ){
                 for (int i = 0 ; i < prescriptionList.size() ; i++){
