@@ -87,6 +87,13 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             try{
                 String oldMid = p.getMid();
                 Integer oldMnum = p.getMnum();
+                String newMid = prescription.getMid();
+                Integer newMnum = prescription.getMnum();
+
+                if(oldMid == newMid && oldMnum == newMnum){
+                    return false;
+                }
+
                 Medicine oldMedicine = medicineRepository.findById(oldMid);
                 if(null == oldMedicine){
                     return false;
@@ -94,8 +101,6 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 Integer oldNum = oldMedicine.getNum();
                 Integer oldRemainderNum = oldNum + oldMnum;
 
-                String newMid = prescription.getMid();
-                Integer newMnum = prescription.getMnum();
                 Medicine newMedicine = medicineRepository.findById(oldMid);
                 if(null == newMedicine){
                     return false;
