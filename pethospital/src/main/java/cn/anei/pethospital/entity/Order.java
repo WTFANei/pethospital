@@ -33,4 +33,6 @@ public class Order {
     private Date ftime;
     @Column(name = "is_finish")
     private Integer isfinish;
+    @Column(name = "status",length = 1)
+    private Integer status;
 }

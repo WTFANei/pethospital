@@ -24,5 +24,6 @@ public class Medicine {
     private Integer num;
     @Column(name = "medicine_price")
     private Double price;
-
+    @Column(name = "status",length = 1)
+    private Integer status;
 }

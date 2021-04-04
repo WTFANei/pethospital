@@ -22,4 +22,6 @@ public class User {
     private String name;
     @Column(name = "user_pwd",length = 16)
     private String pwd;
+    @Column(name = "status",length = 1)
+    private Integer status;
 }

@@ -25,4 +25,6 @@ public class Prescription {
     private Integer mnum;
     @Column(name = "count_price")
     private Double cpirce;
+    @Column(name = "status",length = 1)
+    private Integer status;
 }

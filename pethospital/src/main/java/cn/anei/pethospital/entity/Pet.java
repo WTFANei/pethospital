@@ -24,4 +24,6 @@ public class Pet {
     private Integer age;
     @Column(name = "user_sex",length = 1)
     private Integer sex;
+    @Column(name = "status",length = 1)
+    private Integer status;
 }
