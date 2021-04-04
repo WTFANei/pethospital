@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2021-04-04 12:53:12
+Date: 2021-04-04 13:36:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -123,7 +123,6 @@ CREATE TABLE `pet` (
   `pet_name` varchar(32) NOT NULL,
   `pet_age` int(2) DEFAULT NULL,
   `pet_sex` int(1) DEFAULT NULL COMMENT '0-公 1-母',
-  `user_sex` int(11) DEFAULT NULL,
   `status` int(1) NOT NULL DEFAULT '0' COMMENT '0-生效 1-失效',
   PRIMARY KEY (`pet_id`),
   KEY `fk_user_id` (`user_id`)
