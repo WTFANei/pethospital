@@ -1,9 +1,11 @@
 package cn.anei.pethospital.service.impl;
 
 import cn.anei.pethospital.dto.PrescriptionDto;
+import cn.anei.pethospital.entity.Medicine;
 import cn.anei.pethospital.entity.Prescription;
 import cn.anei.pethospital.param.SearchParam;
 import cn.anei.pethospital.param.SearchParamPrescription;
+import cn.anei.pethospital.repository.MedicineRepository;
 import cn.anei.pethospital.repository.PrescriptionRepository;
 import cn.anei.pethospital.service.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +30,28 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Autowired
     private PrescriptionRepository prescriptionRepository;
+    @Autowired
+    private MedicineRepository medicineRepository;
 
     @Override
     public Boolean prescriptionAdd(Prescription prescription) {
         if (prescriptionRepository.findById(prescription.getId())!=null) {
             return false;
         }else {
+            String mid = prescription.getMid();
+            Integer mnum = prescription.getMnum();
+            Medicine medicine = medicineRepository.findById(mid);
+            Integer num = medicine.getNum();
+            Integer remainderNum = num - mnum;
+            if (remainderNum < 0) {
+                return false;
+            }
+            Double medicinePrice = medicine.getPrice();
+            Double cprice = medicinePrice * mnum;
+            prescription.setCpirce(cprice);
             prescriptionRepository.save(prescription);
+            medicine.setNum(remainderNum);
+            medicineRepository.save(medicine);
             return true;
         }
     }
