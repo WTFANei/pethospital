@@ -22,7 +22,7 @@ public class Pet {
     private String name;
     @Column(name = "pet_age",length = 2)
     private Integer age;
-    @Column(name = "user_sex",length = 1)
+    @Column(name = "pet_sex",length = 1)
     private Integer sex;
     @Column(name = "status",length = 1)
     private Integer status;
