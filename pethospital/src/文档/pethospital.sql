@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2021-04-04 13:36:35
+Date: 2021-04-04 16:31:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -75,7 +75,7 @@ DROP TABLE IF EXISTS `medicine`;
 CREATE TABLE `medicine` (
   `medicine_id` varchar(32) NOT NULL,
   `medicine_name` varchar(32) NOT NULL,
-  `medicine_text` varchar(500) NOT NULL,
+  `medicine_text` varchar(500) DEFAULT NULL,
   `medicine_num` int(4) NOT NULL DEFAULT '0',
   `medicine_price` float(18,2) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '0' COMMENT '0-生效 1-失效',
@@ -100,8 +100,8 @@ CREATE TABLE `orderinfo` (
   `order_text` varchar(500) DEFAULT NULL,
   `order_time` datetime NOT NULL,
   `finish_time` datetime DEFAULT NULL,
-  `is_finish` int(1) NOT NULL COMMENT '0-未完成 1-已完成',
-  `status` int(1) NOT NULL DEFAULT '0' COMMENT '0-生效 1-失效',
+  `is_finish` int(1) NOT NULL DEFAULT '0' COMMENT '0-未完成 1-已完成',
+  `status` int(1) NOT NULL DEFAULT '0' COMMENT '0-生效 1-失效 2-生效但不可提交',
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -112,6 +112,8 @@ INSERT INTO `orderinfo` VALUES ('1', '1', '1', '1', '1', '123123', '2021-04-02 2
 INSERT INTO `orderinfo` VALUES ('2', '2', '3', '4', '5', '123123', '2021-04-03 00:22:51', null, '0', '0');
 INSERT INTO `orderinfo` VALUES ('3', '1', '2', '3', '4', '123123', '2021-04-03 00:23:08', null, '0', '0');
 INSERT INTO `orderinfo` VALUES ('4', '1', '1', '5', '7', '123123', '2021-04-03 00:25:31', null, '0', '0');
+INSERT INTO `orderinfo` VALUES ('402880e6789baa9801789baabfd50000', '1', '1', '1', '1', null, '2021-04-04 14:56:02', '2021-04-04 14:56:02', '0', '0');
+INSERT INTO `orderinfo` VALUES ('402880e6789baa9801789bac0b200001', '1', '1', '1', '1', null, '2021-04-04 14:57:27', '2021-04-04 14:57:27', '0', '1');
 
 -- ----------------------------
 -- Table structure for pet
