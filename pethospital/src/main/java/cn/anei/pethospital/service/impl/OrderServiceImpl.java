@@ -65,6 +65,9 @@ public class OrderServiceImpl implements OrderService {
                     String mid = prescription.getMid();
                     Integer mnum = prescription.getMnum();
                     Medicine medicine = medicineRepository.findById(mid);
+                    if(null == medicine){
+                        return false;
+                    }
                     Integer num = medicine.getNum();
                     Integer remainderNum = num - mnum;
                     if (remainderNum < 0) {
@@ -73,9 +76,11 @@ public class OrderServiceImpl implements OrderService {
                     Double medicinePrice = medicine.getPrice();
                     Double cprice = medicinePrice * mnum;
                     prescription.setCpirce(cprice);
-                    prescriptionRepository.save(prescription);
+
                     medicine.setNum(remainderNum);
                     medicineRepository.save(medicine);
+
+                    prescriptionRepository.save(prescription);
                 }
             }
             return true;

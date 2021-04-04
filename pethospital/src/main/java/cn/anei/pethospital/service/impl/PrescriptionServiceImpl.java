@@ -38,21 +38,30 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         if (prescriptionRepository.findById(prescription.getId())!=null) {
             return false;
         }else {
-            String mid = prescription.getMid();
-            Integer mnum = prescription.getMnum();
-            Medicine medicine = medicineRepository.findById(mid);
-            Integer num = medicine.getNum();
-            Integer remainderNum = num - mnum;
-            if (remainderNum < 0) {
+            try{
+                String mid = prescription.getMid();
+                Integer mnum = prescription.getMnum();
+                Medicine medicine = medicineRepository.findById(mid);
+                if(null == medicine){
+                    return false;
+                }
+                Integer num = medicine.getNum();
+                Integer remainderNum = num - mnum;
+                if (remainderNum < 0) {
+                    return false;
+                }
+                Double medicinePrice = medicine.getPrice();
+                Double cprice = medicinePrice * mnum;
+                prescription.setCpirce(cprice);
+
+                medicine.setNum(remainderNum);
+                medicineRepository.save(medicine);
+
+                prescriptionRepository.save(prescription);
+                return true;
+            }catch (Exception e){
                 return false;
             }
-            Double medicinePrice = medicine.getPrice();
-            Double cprice = medicinePrice * mnum;
-            prescription.setCpirce(cprice);
-            prescriptionRepository.save(prescription);
-            medicine.setNum(remainderNum);
-            medicineRepository.save(medicine);
-            return true;
         }
     }
 
@@ -75,11 +84,39 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     public Boolean prescriptionModify(Prescription prescription) {
         Prescription p = prescriptionRepository.findOne(prescription.getId());
         if (p!=null){
-            p.setMid(prescription.getMid());
-            p.setMnum(prescription.getMnum());
-            p.setCpirce(prescription.getCpirce());
-            p.setStatus(prescription.getStatus());
             try{
+                String oldMid = p.getMid();
+                Integer oldMnum = p.getMnum();
+                Medicine oldMedicine = medicineRepository.findById(oldMid);
+                if(null == oldMedicine){
+                    return false;
+                }
+                Integer oldNum = oldMedicine.getNum();
+                Integer oldRemainderNum = oldNum + oldMnum;
+
+                String newMid = prescription.getMid();
+                Integer newMnum = prescription.getMnum();
+                Medicine newMedicine = medicineRepository.findById(oldMid);
+                if(null == newMedicine){
+                    return false;
+                }
+                Integer newNum = newMedicine.getNum();
+                Integer newRemainderNum = newNum - newMnum;
+                if (newRemainderNum < 0) {
+                    return false;
+                }
+
+                Double medicinePrice = newMedicine.getPrice();
+                Double cprice = medicinePrice * newMnum;
+
+                oldMedicine.setNum(oldRemainderNum);
+                newMedicine.setNum(newRemainderNum);
+                medicineRepository.save(oldMedicine);
+                medicineRepository.save(newMedicine);
+
+                p.setMid(newMid);
+                p.setMnum(newMnum);
+                p.setCpirce(cprice);
                 prescriptionRepository.save(p);
                 return true;
             }catch (Exception e){
