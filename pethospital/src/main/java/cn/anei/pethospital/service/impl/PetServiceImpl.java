@@ -91,6 +91,9 @@ public class PetServiceImpl implements PetService {
                 @Override
                 public Predicate toPredicate(Root<Pet> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                     List<Predicate> predicates = new ArrayList<>();
+                    if(!StringUtils.isEmpty(cond.getUid())){
+                        predicates.add(criteriaBuilder.equal(root.get("uid"), cond.getUid()));
+                    }
                     if(!StringUtils.isEmpty(cond.getName())){
                         predicates.add(criteriaBuilder.like(root.get("name"), "%" + cond.getName() + "%"));
                     }
