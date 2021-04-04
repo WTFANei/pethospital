@@ -74,8 +74,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Override
     public Map<String, Object> getPrescriptions(SearchParam searchParam) {
         PageRequest pageRequest = new PageRequest(searchParam.getPage(), searchParam.getSize());
-        Page<Prescription> prescriptions;
-            prescriptions = prescriptionRepository.findAll(pageRequest);
+        Page<Prescription> prescriptions = prescriptionRepository.findAll(pageRequest);
         return prescriptions(prescriptions);
     }
 

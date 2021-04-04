@@ -112,17 +112,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Map<String, Object> getOrders(SearchParam searchParam) {
         PageRequest pageRequest = new PageRequest(searchParam.getPage(), searchParam.getSize());
-        Page<Order> orders;
-        orders = orderRepository.findAll(pageRequest);
+        Page<Order> orders = orderRepository.findAll(pageRequest);
         return orders(orders);
     }
-
-//    @Override
-//    public Map<String, Object> getOrders() {
-//        PageRequest pageRequest = new PageRequest(0, 10);
-//        Page<Order> orders = orderRepository.findAll(pageRequest);
-//        return orders(orders);
-//    }
 
     @Override
     public Map<String, Object> getOrdersByDid(SearchParam searchParam) {
