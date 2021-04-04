@@ -60,6 +60,7 @@ public class ItemServiceImpl implements ItemService {
         if (i!=null){
             i.setName(item.getName());
             i.setText(item.getText());
+            i.setStatus(item.getStatus());
             try{
                 itemRepository.save(i);
                 return true;
