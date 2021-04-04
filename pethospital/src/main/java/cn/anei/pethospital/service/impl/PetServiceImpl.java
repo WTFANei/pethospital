@@ -42,7 +42,9 @@ public class PetServiceImpl implements PetService {
     @Override
     public Boolean petDelete(String id) {
         try {
-            petRepository.delete(id);
+            Pet pet = petRepository.findById(id);
+            pet.setStatus(1);
+            petRepository.save(pet);
         }
         catch (Exception e){
             return true;
@@ -97,6 +99,9 @@ public class PetServiceImpl implements PetService {
                     }
                     if(!StringUtils.isEmpty(cond.getSex())){
                         predicates.add(criteriaBuilder.equal(root.get("sex"), cond.getSex()));
+                    }
+                    if(!StringUtils.isEmpty(cond.getStatus())){
+                        predicates.add(criteriaBuilder.equal(root.get("status"), cond.getStatus()));
                     }
                     return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
                 }

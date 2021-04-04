@@ -42,7 +42,9 @@ public class MedicineServiceImpl implements MedicineService {
     @Override
     public Boolean medicineDelete(String id) {
         try {
-            medicineRepository.delete(id);
+            Medicine medicine = medicineRepository.findById(id);
+            medicine.setStatus(1);
+            medicineRepository.save(medicine);
         }
         catch (Exception e){
             return true;
@@ -98,6 +100,9 @@ public class MedicineServiceImpl implements MedicineService {
                     }
                     if(!StringUtils.isEmpty(cond.getNum())){
                         predicates.add(criteriaBuilder.greaterThan(root.get("num"), cond.getNum()));
+                    }
+                    if(!StringUtils.isEmpty(cond.getStatus())){
+                        predicates.add(criteriaBuilder.equal(root.get("status"), cond.getStatus()));
                     }
                     return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
                 }

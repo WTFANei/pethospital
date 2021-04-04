@@ -13,11 +13,13 @@ public class UserDto {
     private String phone;
     private String name;
     private String pwd;
+    private Integer status;
 
     public UserDto(User user){
         this.id = user.getId();
         this.phone = user.getPhone();
         this.name = user.getName();
         this.pwd = user.getPwd();
+        this.status = user.getStatus();
     }
 }

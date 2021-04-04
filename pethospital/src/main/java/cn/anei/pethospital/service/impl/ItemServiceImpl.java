@@ -43,7 +43,9 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Boolean itemDelete(String id) {
         try {
-            itemRepository.delete(id);
+            Item item = itemRepository.findById(id);
+            item.setStatus(1);
+            itemRepository.save(item);
         }
         catch (Exception e){
             return true;
@@ -94,6 +96,9 @@ public class ItemServiceImpl implements ItemService {
                     }
                     if(!StringUtils.isEmpty(cond.getText())){
                         predicates.add(criteriaBuilder.like(root.get("text"), "%" + cond.getText() + "%"));
+                    }
+                    if(!StringUtils.isEmpty(cond.getStatus())){
+                        predicates.add(criteriaBuilder.equal(root.get("status"), cond.getStatus()));
                     }
                     return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
                 }

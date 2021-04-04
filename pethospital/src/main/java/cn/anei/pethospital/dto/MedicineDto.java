@@ -12,13 +12,15 @@ public class MedicineDto {
     private String text;
     private Integer num;
     private Double price;
+    private Integer status;
 
 
-    public MedicineDto(Medicine midicine) {
-        this.id = midicine.getId();
-        this.name = midicine.getName();
-        this.text = midicine.getText();
-        this.num = midicine.getNum();
-        this.price = midicine.getPrice();
+    public MedicineDto(Medicine medicine) {
+        this.id = medicine.getId();
+        this.name = medicine.getName();
+        this.text = medicine.getText();
+        this.num = medicine.getNum();
+        this.price = medicine.getPrice();
+        this.status = medicine.getStatus();
     }
 }

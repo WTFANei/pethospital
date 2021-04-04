@@ -12,7 +12,7 @@ public class PrescriptionDto {
     private String mid;
     private Integer mnum;
     private Double cprice;
-
+    private Integer status;
 
     public PrescriptionDto(Prescription prescription) {
         this.id = prescription.getId();
@@ -20,5 +20,6 @@ public class PrescriptionDto {
         this.mid = prescription.getMid();
         this.mnum = prescription.getMnum();
         this.cprice = prescription.getCpirce();
+        this.status = prescription.getStatus();
     }
 }

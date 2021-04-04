@@ -72,7 +72,9 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public Boolean doctorDelete(String id) {
         try {
-            doctorRepository.delete(id);
+            Doctor doctor = doctorRepository.findById(id);
+            doctor.setStatus(1);
+            doctorRepository.save(doctor);
         }
         catch (Exception e){
             return true;
@@ -123,6 +125,9 @@ public class DoctorServiceImpl implements DoctorService {
                     }
                     if(!StringUtils.isEmpty(cond.getName())){
                         predicates.add(criteriaBuilder.like(root.get("name"), "%" + cond.getName() + "%"));
+                    }
+                    if(!StringUtils.isEmpty(cond.getStatus())){
+                        predicates.add(criteriaBuilder.equal(root.get("status"), cond.getStatus()));
                     }
                     return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
                 }

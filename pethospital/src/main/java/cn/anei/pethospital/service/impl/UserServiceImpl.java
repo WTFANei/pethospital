@@ -78,6 +78,9 @@ public class UserServiceImpl implements UserService {
                     if(!StringUtils.isEmpty(cond.getPhone())){
                         predicates.add(criteriaBuilder.like(root.get("phone"), "%" + cond.getPhone() + "%"));
                     }
+                    if(!StringUtils.isEmpty(cond.getStatus())){
+                        predicates.add(criteriaBuilder.equal(root.get("status"), cond.getStatus()));
+                    }
                     return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
                 }
             };
@@ -129,7 +132,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean userDelete(String id) {
         try {
-            userRepository.delete(id);
+            User user = userRepository.findById(id);
+            user.setStatus(1);
+            userRepository.save(user);
         }
         catch (Exception e){
             return true;

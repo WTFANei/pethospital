@@ -82,7 +82,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Boolean orderDelete(String id) {
-        orderRepository.delete(id);
+        try {
+            Order order = orderRepository.findById(id);
+            order.setStatus(1);
+            orderRepository.save(order);
+        }
+        catch (Exception e){
+            return true;
+        }
         return orderRepository.exists(id) ? true : false;
     }
 
@@ -155,6 +162,9 @@ public class OrderServiceImpl implements OrderService {
                     }
                     if(!StringUtils.isEmpty(cond.getIsfinish())){
                         predicates.add(criteriaBuilder.equal(root.get("isfinish"),cond.getIsfinish()));
+                    }
+                    if(!StringUtils.isEmpty(cond.getStatus())){
+                        predicates.add(criteriaBuilder.equal(root.get("status"), cond.getStatus()));
                     }
                     return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
                 }

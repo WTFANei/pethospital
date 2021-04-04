@@ -18,6 +18,7 @@ public class OrderDto {
     private Date otime;
     private Date ftime;
     private Integer isfinish;
+    private Integer status;
 
 
     public OrderDto(Order order) {
@@ -30,5 +31,6 @@ public class OrderDto {
         this.otime = order.getOtime();
         this.ftime = order.getFtime();
         this.isfinish = order.getIsfinish();
+        this.status = order.getStatus();
     }
 }

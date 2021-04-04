@@ -42,7 +42,14 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Override
     public Boolean prescriptionDelete(String id) {
-        prescriptionRepository.delete(id);
+        try {
+            Prescription prescription = prescriptionRepository.findById(id);
+            prescription.setStatus(1);
+            prescriptionRepository.save(prescription);
+        }
+        catch (Exception e){
+            return true;
+        }
         return prescriptionRepository.exists(id) ? true : false;
     }
 
@@ -85,6 +92,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                     List<Predicate> predicates = new ArrayList<>();
                     if(!StringUtils.isEmpty(cond.getOid())){
                         predicates.add(criteriaBuilder.equal(root.get("oid"),cond.getOid()));
+                    }
+                    if(!StringUtils.isEmpty(cond.getStatus())){
+                        predicates.add(criteriaBuilder.equal(root.get("status"), cond.getStatus()));
                     }
                     return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
                 }

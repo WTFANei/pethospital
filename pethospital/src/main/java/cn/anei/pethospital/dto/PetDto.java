@@ -12,6 +12,7 @@ public class PetDto {
     private String name;
     private Integer age;
     private Integer sex;
+    private Integer status;
 
 
     public PetDto(Pet pet) {
@@ -20,5 +21,6 @@ public class PetDto {
         this.name = pet.getName();
         this.age = pet.getAge();
         this.sex = pet.getSex();
+        this.status = pet.getStatus();
     }
 }

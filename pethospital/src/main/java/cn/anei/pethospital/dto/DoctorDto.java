@@ -14,6 +14,7 @@ public class DoctorDto {
     private String name;
     private Date birth;
     private String pwd;
+    private Integer status;
 
 
     public DoctorDto(Doctor doctor) {
@@ -22,5 +23,6 @@ public class DoctorDto {
         this.name = doctor.getName();
         this.birth = doctor.getBirth();
         this.pwd = doctor.getPwd();
+        this.status = doctor.getStatus();
     }
 }
