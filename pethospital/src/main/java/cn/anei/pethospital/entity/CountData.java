@@ -14,9 +14,7 @@ public class CountData {
     @Column(name = "id")
     private String id;
     @Column(name = "count")
-    private Long count;
+    private String count;
     @Column(name = "name")
     private String name;
-    @Column(name = "price")
-    private Double price;
 }
