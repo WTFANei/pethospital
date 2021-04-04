@@ -61,6 +61,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             p.setMid(prescription.getMid());
             p.setMnum(prescription.getMnum());
             p.setCpirce(prescription.getCpirce());
+            p.setStatus(prescription.getStatus());
             try{
                 prescriptionRepository.save(p);
                 return true;
