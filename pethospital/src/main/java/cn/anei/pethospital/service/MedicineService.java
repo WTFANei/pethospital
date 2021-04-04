@@ -19,6 +19,6 @@ public interface MedicineService {
     Map<String, Object> getMedicinesByCond(SearchParamMedicine searchParamMedicine);
 
 
-    Medicine getMedicine(Medicine medicine);
+    Medicine getMedicine(String id);
 
 }

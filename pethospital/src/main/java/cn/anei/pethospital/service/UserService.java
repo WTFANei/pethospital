@@ -23,7 +23,6 @@ public interface UserService {
 
     Map<String, Object> getUsersByCond(SearchParamUser searchParamUser);
 
-
-    User getUser(User user);
+    User getUser(String id);
 
 }

@@ -18,6 +18,6 @@ public interface ItemService {
 
     Map<String, Object> getItemsByCond(SearchParamItem searchParamItem);
 
-    Item getItem(Item item);
+    Item getItem(String id);
 
 }

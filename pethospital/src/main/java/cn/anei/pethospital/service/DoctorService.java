@@ -22,6 +22,6 @@ public interface DoctorService {
 
     Map<String, Object> getDoctorsByCond(SearchParamDoctor searchParamDoctor);
 
-    Doctor getDoctor(Doctor doctor);
+    Doctor getDoctor(String id);
 
 }

@@ -106,8 +106,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(User user) {
-        User u = userRepository.findById(user.getId());
+    public User getUser(String id) {
+        User u = userRepository.findById(id);
         return u;
     }
 

@@ -27,6 +27,6 @@ public interface OrderService {
 
     Map<String, Object> getOrdersByCond(SearchParamOrder searchParamOrder);
 
-    Order getOrder(Order order);
+    Order getOrder(String id);
 
 }

@@ -67,8 +67,8 @@ public class OrderController {
     }
 
     @PostMapping("/getOrder")
-    public ResultVO getOrder(@RequestBody @Valid Order order) {
-        Order d = orderService.getOrder(order);
+    public ResultVO getOrder(@RequestParam("id") String id) {
+        Order d = orderService.getOrder(id);
         return d != null ? ResultVOUtil.success(d) : ResultVOUtil.error(1, "信息获取失败！");
     }
 

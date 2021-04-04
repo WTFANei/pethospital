@@ -114,8 +114,8 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public Pet getPet(Pet pet) {
-        Pet p = petRepository.findById(pet.getId());
+    public Pet getPet(String id) {
+        Pet p = petRepository.findById(id);
         return p;
     }
 

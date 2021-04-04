@@ -57,8 +57,8 @@ public class ItemController {
     }
 
     @PostMapping("/getItem")
-    public ResultVO getItem(@RequestBody @Valid Item item) {
-        Item i = itemService.getItem(item);
+    public ResultVO getItem(@RequestParam("id") String id) {
+        Item i = itemService.getItem(id);
         return i != null ? ResultVOUtil.success(i) : ResultVOUtil.error(1, "信息获取失败！");
     }
 

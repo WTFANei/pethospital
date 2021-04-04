@@ -67,8 +67,8 @@ public class UserController {
     }
 
     @PostMapping("/getUser")
-    public ResultVO getUser(@RequestBody @Valid User user) {
-        User u = userService.getUser(user);
+    public ResultVO getUser(@RequestParam("id") String id) {
+        User u = userService.getUser(id);
         return u != null ? ResultVOUtil.success(u) : ResultVOUtil.error(1, "信息获取失败！");
     }
 

@@ -60,8 +60,8 @@ public class PrescriptionController {
     }
 
     @PostMapping("/getPrescription")
-    public ResultVO getPrescription(@RequestBody @Valid Prescription prescription) {
-        Prescription d = prescriptionService.getPrescription(prescription);
+    public ResultVO getPrescription(@RequestParam("id") String id) {
+        Prescription d = prescriptionService.getPrescription(id);
         return d != null ? ResultVOUtil.success(d) : ResultVOUtil.error(1, "信息获取失败！");
     }
 

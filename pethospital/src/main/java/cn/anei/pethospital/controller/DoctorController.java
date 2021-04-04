@@ -75,8 +75,8 @@ public class DoctorController {
     }
 
     @PostMapping("/getDoctor")
-    public ResultVO getDoctor(@RequestBody @Valid Doctor doctor) {
-        Doctor d = doctorService.getDoctor(doctor);
+    public ResultVO getDoctor(@RequestParam("id") String id) {
+        Doctor d = doctorService.getDoctor(id);
         return d != null ? ResultVOUtil.success(d) : ResultVOUtil.error(1, "信息获取失败！");
     }
 

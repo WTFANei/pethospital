@@ -18,6 +18,6 @@ public interface PrescriptionService {
 
     Map<String, Object> getPrescriptionsByCond(SearchParamPrescription searchParamPrescription);
 
-    Prescription getPrescription(Prescription prescription);
+    Prescription getPrescription(String id);
 
 }

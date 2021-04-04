@@ -112,8 +112,8 @@ public class ItemServiceImpl implements ItemService {
 
 
     @Override
-    public Item getItem(Item item) {
-        Item i = itemRepository.findById(item.getId());
+    public Item getItem(String id) {
+        Item i = itemRepository.findById(id);
         return i;
     }
 

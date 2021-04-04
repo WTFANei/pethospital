@@ -18,6 +18,6 @@ public interface PetService {
 
     Map<String, Object> getPetsByCond(SearchParamPet searchParamPet);
 
-    Pet getPet(Pet pet);
+    Pet getPet(String id);
 
 }

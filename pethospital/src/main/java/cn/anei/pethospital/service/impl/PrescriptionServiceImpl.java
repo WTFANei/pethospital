@@ -107,8 +107,8 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
-    public Prescription getPrescription(Prescription prescription) {
-        Prescription p = prescriptionRepository.findById(prescription.getId());
+    public Prescription getPrescription(String id) {
+        Prescription p = prescriptionRepository.findById(id);
         return p;
     }
 

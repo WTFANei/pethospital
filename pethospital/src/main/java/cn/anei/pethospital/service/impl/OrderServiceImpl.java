@@ -177,8 +177,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order getOrder(Order order) {
-        Order o = orderRepository.findById(order.getId());
+    public Order getOrder(String id) {
+        Order o = orderRepository.findById(id);
         return o;
     }
 

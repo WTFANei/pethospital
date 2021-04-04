@@ -115,8 +115,8 @@ public class MedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public Medicine getMedicine(Medicine medicine) {
-        Medicine m = medicineRepository.findById(medicine.getId());
+    public Medicine getMedicine(String id) {
+        Medicine m = medicineRepository.findById(id);
         return m;
     }
 
