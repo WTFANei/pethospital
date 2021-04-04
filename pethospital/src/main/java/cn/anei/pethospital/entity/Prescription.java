@@ -27,4 +27,6 @@ public class Prescription {
     private Double cpirce;
     @Column(name = "status",length = 1)
     private Integer status = 0;
+    @Column(name = "prescription_time")
+    private Date ptime;
 }

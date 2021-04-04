@@ -2,10 +2,12 @@ package cn.anei.pethospital.service.impl;
 
 import cn.anei.pethospital.dto.PrescriptionDto;
 import cn.anei.pethospital.entity.Medicine;
+import cn.anei.pethospital.entity.Order;
 import cn.anei.pethospital.entity.Prescription;
 import cn.anei.pethospital.param.SearchParam;
 import cn.anei.pethospital.param.SearchParamPrescription;
 import cn.anei.pethospital.repository.MedicineRepository;
+import cn.anei.pethospital.repository.OrderRepository;
 import cn.anei.pethospital.repository.PrescriptionRepository;
 import cn.anei.pethospital.service.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class PrescriptionServiceImpl implements PrescriptionService {
@@ -32,6 +31,8 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private PrescriptionRepository prescriptionRepository;
     @Autowired
     private MedicineRepository medicineRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Override
     public Boolean prescriptionAdd(Prescription prescription) {
@@ -39,6 +40,13 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             return false;
         }else {
             try{
+                String orderId = prescription.getOid();
+                Order order = orderRepository.findById(orderId);
+                if(null != order && (order.getStatus() == 1 || order.getStatus() == 2)){
+                    return false;
+                }
+
+                Date time = new Date();
                 String mid = prescription.getMid();
                 Integer mnum = prescription.getMnum();
                 Medicine medicine = medicineRepository.findById(mid);
@@ -53,6 +61,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 Double medicinePrice = medicine.getPrice();
                 Double cprice = medicinePrice * mnum;
                 prescription.setCpirce(cprice);
+                prescription.setPtime(time);
 
                 medicine.setNum(remainderNum);
                 medicineRepository.save(medicine);
@@ -83,8 +92,16 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Override
     public Boolean prescriptionModify(Prescription prescription) {
         Prescription p = prescriptionRepository.findOne(prescription.getId());
+
         if (p!=null){
             try{
+                String orderId = prescription.getOid();
+                Order order = orderRepository.findById(orderId);
+                if(null != order && (order.getStatus() == 1 || order.getStatus() == 2)){
+                    return false;
+                }
+
+                Date time = new Date();
                 String oldMid = p.getMid();
                 Integer oldMnum = p.getMnum();
                 String newMid = prescription.getMid();
@@ -122,6 +139,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 p.setMid(newMid);
                 p.setMnum(newMnum);
                 p.setCpirce(cprice);
+                p.setPtime(time);
                 prescriptionRepository.save(p);
                 return true;
             }catch (Exception e){

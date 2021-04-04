@@ -7,6 +7,7 @@ import cn.anei.pethospital.entity.Prescription;
 import cn.anei.pethospital.param.OrderCommitParam;
 import cn.anei.pethospital.param.SearchParam;
 import cn.anei.pethospital.param.SearchParamOrder;
+import cn.anei.pethospital.repository.CountRepository;
 import cn.anei.pethospital.repository.MedicineRepository;
 import cn.anei.pethospital.repository.OrderRepository;
 import cn.anei.pethospital.repository.PrescriptionRepository;
@@ -54,7 +55,8 @@ public class OrderServiceImpl implements OrderService {
         List<Prescription> prescriptionList = orderCommitParam.getPrescriptionList();
         String orderId = order.getId();
         try {
-            order.setFtime(new Date());
+            Date time = new Date();
+            order.setFtime(time);
             order.setText(order.getText());
             order.setIsfinish(1);
             orderRepository.save(order);
@@ -76,6 +78,7 @@ public class OrderServiceImpl implements OrderService {
                     Double medicinePrice = medicine.getPrice();
                     Double cprice = medicinePrice * mnum;
                     prescription.setCpirce(cprice);
+                    prescription.setPtime(time);
 
                     medicine.setNum(remainderNum);
                     medicineRepository.save(medicine);
