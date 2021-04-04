@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2021-04-04 20:27:02
+Date: 2021-04-04 22:23:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,6 +40,7 @@ CREATE TABLE `count_data` (
   `id` varchar(255) NOT NULL,
   `count` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
+  `price` double DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -178,10 +179,11 @@ CREATE TABLE `prescription` (
 -- Records of prescription
 -- ----------------------------
 INSERT INTO `prescription` VALUES ('1', '1', '1', '1', '10.00', '2021-04-04 20:08:21', '0');
-INSERT INTO `prescription` VALUES ('2', '1', '2', '2', '10.00', '2021-04-04 20:09:34', '0');
+INSERT INTO `prescription` VALUES ('2', '1', '2', '3', '15.00', '2021-04-04 20:09:34', '0');
 INSERT INTO `prescription` VALUES ('3', '2', '1', '2', '20.00', '2021-04-04 20:09:49', '0');
 INSERT INTO `prescription` VALUES ('4', '3', '3', '3', '9.00', '2021-04-04 20:13:20', '0');
-INSERT INTO `prescription` VALUES ('5', '4', '4', '4', '400.00', '2021-04-04 20:14:53', '0');
+INSERT INTO `prescription` VALUES ('5', '4', '4', '9', '900.00', '2021-04-04 20:14:53', '0');
+INSERT INTO `prescription` VALUES ('6', '4', '2', '2', '10.00', '2021-04-04 21:19:29', '0');
 
 -- ----------------------------
 -- Table structure for user
