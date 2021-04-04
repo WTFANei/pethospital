@@ -48,6 +48,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Boolean orderCommit(OrderCommitParam orderCommitParam) {
         Order order = orderCommitParam.getOrder();
+        if(order.getStatus() == 2){
+            return false;
+        }
         List<Prescription> prescriptionList = orderCommitParam.getPrescriptionList();
         String orderId = order.getId();
         try {
@@ -100,7 +103,7 @@ public class OrderServiceImpl implements OrderService {
     public Boolean orderModify(Order order) {
         Order o = orderRepository.findOne(order.getId());
         if (o!=null){
-            o.setText(order.getText());
+            o.setStatus(order.getStatus());
             try{
                 orderRepository.save(o);
                 return true;
