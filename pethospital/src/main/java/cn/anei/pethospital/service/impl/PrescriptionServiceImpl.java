@@ -85,7 +85,12 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         catch (Exception e){
             return true;
         }
-        return prescriptionRepository.exists(id) ? true : false;
+        Prescription p = prescriptionRepository.findByIdAndStatus(id, "0");
+        if(p != null){
+            return true;
+        }else{
+            return  false;
+        }
     }
 
 

@@ -139,7 +139,12 @@ public class UserServiceImpl implements UserService {
         catch (Exception e){
             return true;
         }
-        return userRepository.exists(id) ? true : false;
+        User u = userRepository.findByIdAndStatus(id, "0");
+        if(u != null){
+            return true;
+        }else{
+            return  false;
+        }
     }
 
     @Override

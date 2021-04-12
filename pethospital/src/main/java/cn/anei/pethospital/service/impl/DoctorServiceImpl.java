@@ -59,7 +59,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Boolean doctorAdd(Doctor doctor) {
-        if (doctorRepository.findById(doctor.getId())!=null) {
+        if (doctorRepository.findByAccount(doctor.getAccount())!=null) {
             return false;
         }else {
             doctor.setPwd(doctor.getPwd());
@@ -79,7 +79,12 @@ public class DoctorServiceImpl implements DoctorService {
         catch (Exception e){
             return true;
         }
-        return doctorRepository.exists(id) ? true : false;
+        Doctor d = doctorRepository.findByIdAndStatus(id, "0");
+        if(d != null){
+            return true;
+        }else{
+            return  false;
+        }
     }
 
 

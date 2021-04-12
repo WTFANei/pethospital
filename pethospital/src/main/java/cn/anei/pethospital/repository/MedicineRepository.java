@@ -10,5 +10,7 @@ public interface MedicineRepository extends JpaRepository<Medicine, String>, Jpa
 
     Medicine findById(String id);
 
+    Medicine findByIdAndStatus(String id, String status);
+
     Page<Medicine> findAllByNameContaining(String name, Pageable pageable);
 }

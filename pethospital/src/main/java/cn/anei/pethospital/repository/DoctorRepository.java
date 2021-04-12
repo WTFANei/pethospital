@@ -11,5 +11,9 @@ public interface DoctorRepository extends JpaRepository<Doctor, String>, JpaSpec
 
     Doctor findById(String id);
 
+    Doctor findByIdAndStatus(String id, String status);
+
+    Doctor findByAccount(String account);
+
     Page<Doctor> findAllByNameContaining(String name, Pageable pageable);
 }

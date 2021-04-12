@@ -10,5 +10,7 @@ public interface ItemRepository extends JpaRepository<Item, String>, JpaSpecific
 
     Item findById(String id);
 
+    Item findByIdAndStatus(String id, String status);
+
     Page<Item> findAllByNameContaining(String name, Pageable pageable);
 }

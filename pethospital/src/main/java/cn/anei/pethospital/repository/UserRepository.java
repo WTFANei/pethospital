@@ -14,4 +14,6 @@ public interface UserRepository extends JpaRepository<User, String>, JpaSpecific
     Page<User> findAllByPhoneContaining(String phone, Pageable pageable);
 
     User findById(String id);
+
+    User findByIdAndStatus(String id, String status);
 }
