@@ -49,7 +49,7 @@ public class PetServiceImpl implements PetService {
         catch (Exception e){
             return true;
         }
-        Pet p = petRepository.findByIdAndStatus(id, "0");
+        Pet p = petRepository.findByIdAndStatus(id, 0);
         if(p != null){
             return true;
         }else{

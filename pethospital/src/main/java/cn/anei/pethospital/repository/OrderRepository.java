@@ -10,7 +10,7 @@ public interface OrderRepository extends JpaRepository<Order, String>, JpaSpecif
 
     Order findById(String id);
 
-    Order findByIdAndStatus(String id, String status);
+    Order findByIdAndStatus(String id, Integer status);
 
     Page<Order> findAllByDidOrderByOtimeDesc(String did, Pageable pageable);
 

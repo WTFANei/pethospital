@@ -102,7 +102,7 @@ public class OrderServiceImpl implements OrderService {
         catch (Exception e){
             return true;
         }
-        Order o = orderRepository.findByIdAndStatus(id, "0");
+        Order o = orderRepository.findByIdAndStatus(id, 0);
         if(o != null){
             return true;
         }else{

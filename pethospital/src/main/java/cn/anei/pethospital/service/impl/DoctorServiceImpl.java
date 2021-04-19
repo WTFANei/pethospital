@@ -79,7 +79,7 @@ public class DoctorServiceImpl implements DoctorService {
         catch (Exception e){
             return true;
         }
-        Doctor d = doctorRepository.findByIdAndStatus(id, "0");
+        Doctor d = doctorRepository.findByIdAndStatus(id, 0);
         if(d != null){
             return true;
         }else{

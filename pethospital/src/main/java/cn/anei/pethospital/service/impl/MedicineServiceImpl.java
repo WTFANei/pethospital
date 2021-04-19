@@ -49,7 +49,7 @@ public class MedicineServiceImpl implements MedicineService {
         catch (Exception e){
             return true;
         }
-        Medicine m = medicineRepository.findByIdAndStatus(id, "0");
+        Medicine m = medicineRepository.findByIdAndStatus(id, 0);
         if(m != null){
             return true;
         }else{

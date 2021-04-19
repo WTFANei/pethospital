@@ -8,5 +8,5 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Stri
 
     Prescription findById(String id);
 
-    Prescription findByIdAndStatus(String id, String status);
+    Prescription findByIdAndStatus(String id, Integer status);
 }

@@ -50,7 +50,7 @@ public class ItemServiceImpl implements ItemService {
         catch (Exception e){
             return true;
         }
-        Item i = itemRepository.findByIdAndStatus(id, "0");
+        Item i = itemRepository.findByIdAndStatus(id, 0);
         if(i != null){
             return true;
         }else{
